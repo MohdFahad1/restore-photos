@@ -18,7 +18,13 @@ export default function Navbar() {
           <span className="font-bold">restorePhotos</span>
         </Link>
         <div className="flex gap-2 md:gap-5 text-md md:text-xl font-semibold">
-          <Link href={"/"}>Home</Link>|<Link href={"/restore"}>Restore</Link>
+          <Link href={"/"} className="hover:text-blue-500 duration-100">
+            Home
+          </Link>
+          |
+          <Link href={"/restore"} className="hover:text-blue-500 duration-100">
+            Restore
+          </Link>
         </div>
       </div>
     </div>
