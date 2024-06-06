@@ -10,7 +10,14 @@ export default function Footer() {
           <div className="w-auto p-8">
             <div className="inline-flex items-center">
               <span className="ml-4 text-lg font-medium">
-                Powered by <b>Cloudinary</b>. Created by <b>Mohd Fahad</b>.
+                Powered by{" "}
+                <Link
+                  href={"/https://cloudinary.com/"}
+                  className="font-bold hover:text-gray-700"
+                >
+                  Cloudinary
+                </Link>
+                . Created by <b>Mohd Fahad</b>.
               </span>
             </div>
           </div>
