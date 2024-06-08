@@ -1,5 +1,4 @@
 import Input from "@/components/MediaUploader";
-import Transformed from "@/components/Transformed";
 import React from "react";
 
 const RestorePage = () => {
@@ -12,7 +11,6 @@ const RestorePage = () => {
           </h1>
           <div className="flex flex-col md:flex-row md:gap-20 gap-5">
             <Input />
-            <Transformed />
           </div>
         </div>
       </div>

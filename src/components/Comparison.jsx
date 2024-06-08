@@ -15,7 +15,7 @@ const Comparison = () => {
               alt="Old Rock"
               width={500}
               height={500}
-              className="rounded-3xl"
+              className="rounded-3xl h-full w-full object-cover"
             />
           </div>
           <div>
@@ -27,7 +27,7 @@ const Comparison = () => {
               alt="New Rock"
               width={500}
               height={500}
-              className="rounded-3xl"
+              className="rounded-3xl h-full w-full object-cover"
             />
           </div>
         </div>
