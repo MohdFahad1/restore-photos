@@ -13,9 +13,9 @@ const Comparison = () => {
             <Image
               src={"/old.png"}
               alt="Old Rock"
-              width={500}
-              height={500}
-              className="rounded-3xl h-full w-full object-cover"
+              width={400}
+              height={400}
+              className="rounded-3xl object-cover"
             />
           </div>
           <div>
@@ -25,9 +25,9 @@ const Comparison = () => {
             <Image
               src={"/new.png"}
               alt="New Rock"
-              width={500}
-              height={500}
-              className="rounded-3xl h-full w-full object-cover"
+              width={400}
+              height={400}
+              className="rounded-3xl object-cover"
             />
           </div>
         </div>
