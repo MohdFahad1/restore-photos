@@ -5,6 +5,7 @@ import { CldImage, CldUploadButton } from "next-cloudinary";
 import toast from "react-hot-toast";
 import { dataUrl } from "@/libs/utils";
 import { download } from "@/libs/download";
+// import Loader from "@/libs/loader";
 
 const Input = () => {
   const [resource, setResource] = useState();
@@ -99,6 +100,7 @@ const Input = () => {
                 ></div>
               </div>
             ) : (
+              // <Loader />
               <CldImage
                 src={resource.public_id}
                 alt="Transformed Image"
