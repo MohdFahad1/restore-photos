@@ -16,7 +16,7 @@ export default function Navbar() {
           <span>
             <Image src="/logo.png" alt="logo" height={50} width={50} />
           </span>
-          <span className="font-bold">restorePhotos</span>
+          <span className="font-bold">ImageFix.io</span>
         </Link>
         <div className="flex items-center gap-1 md:gap-5 text-md md:text-xl font-semibold">
           <Link href={"/"} className="hover:text-blue-500 duration-100">
