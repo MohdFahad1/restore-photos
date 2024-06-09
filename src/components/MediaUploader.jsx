@@ -1,21 +1,33 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CldImage, CldUploadButton } from "next-cloudinary";
 import toast from "react-hot-toast";
 import { dataUrl } from "@/libs/utils";
 
+import Loader from "@/libs/loader";
+
 const Input = () => {
   const [resource, setResource] = useState();
   const [enhancement, setEnhancement] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const transormations = {};
+  const transformations = {};
 
   if (enhancement === "restore") {
-    transormations.restore = true;
+    transformations.restore = true;
   } else if (enhancement === "improve") {
-    transormations.improve = true;
+    transformations.improve = true;
   }
+
+  useEffect(() => {
+    if (enhancement) {
+      setIsLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+    }
+  }, [enhancement]);
 
   const onUploadSuccessHandler = (results) => {
     setResource(results?.info);
@@ -70,6 +82,8 @@ const Input = () => {
               <div className="flex flex-col gap-4 justify-center items-center bg-gray-200 mt-5 rounded-xl h-[400px] w-[300px]">
                 <p>Transformed Image</p>
               </div>
+            ) : isLoading ? (
+              <Loader height={resource.height} width={resource.width} />
             ) : (
               <CldImage
                 src={resource.public_id}
@@ -77,8 +91,7 @@ const Input = () => {
                 className="object-cover rounded-[10px] mt-5"
                 width={resource.width}
                 height={resource.height}
-                preserveTransformations
-                {...transormations}
+                {...transformations}
                 placeholder={dataUrl}
               />
             )}
