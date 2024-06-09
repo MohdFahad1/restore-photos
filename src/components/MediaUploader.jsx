@@ -8,11 +8,12 @@ const Input = () => {
   const [resource, setResource] = useState();
   const [enhancement, setEnhancement] = useState("");
 
-  console.log(enhancement);
   const transormations = {};
 
   if (enhancement === "restore") {
     transormations.restore = true;
+  } else if (enhancement === "improve") {
+    transormations.improve = true;
   }
 
   const onUploadSuccessHandler = (results, { widget }) => {
@@ -37,9 +38,9 @@ const Input = () => {
                 <CldImage
                   src={resource.public_id}
                   alt="Uploaded"
-                  className="w-full h-full object-cover rounded-[10px]"
-                  width={300}
-                  height={400}
+                  className="object-cover rounded-[10px]"
+                  width={resource.width}
+                  height={resource.height}
                 />
               </div>
             ) : (
@@ -65,20 +66,20 @@ const Input = () => {
 
           <div>
             <h1 className="text-2xl font-bold">Transformed</h1>
-            <div className="flex flex-col gap-4 justify-center items-center bg-gray-200 mt-5 rounded-xl h-[400px] w-[300px]">
-              {!resource?.public_id ? (
+            {!resource?.public_id ? (
+              <div className="flex flex-col gap-4 justify-center items-center bg-gray-200 mt-5 rounded-xl h-[400px] w-[300px]">
                 <p>Transformed Image</p>
-              ) : (
-                <CldImage
-                  src={resource.public_id}
-                  alt="Transformed Image"
-                  className="w-full h-full object-cover rounded-[10px]"
-                  width={resource.width}
-                  height={resource.height}
-                  {...transormations}
-                />
-              )}
-            </div>
+              </div>
+            ) : (
+              <CldImage
+                src={resource.public_id}
+                alt="Transformed Image"
+                className="object-cover rounded-[10px] mt-5"
+                width={resource.width}
+                height={resource.height}
+                {...transormations}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -88,6 +89,12 @@ const Input = () => {
           onClick={() => setEnhancement("restore")}
         >
           Restore
+        </button>
+        <button
+          className="bg-black hover:bg-black/80 rounded-md px-6 py-3 text-white text-xl font-semibold"
+          onClick={() => setEnhancement("improve")}
+        >
+          Improve
         </button>
         <button className="border-2 border-black hover:bg-gray-200 rounded-md px-6 py-3 text-xl font-semibold">
           Download
