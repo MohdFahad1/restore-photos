@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { CldImage, CldUploadButton } from "next-cloudinary";
 import toast from "react-hot-toast";
+import { dataUrl } from "@/libs/utils";
 
 const Input = () => {
   const [resource, setResource] = useState();
@@ -16,11 +17,9 @@ const Input = () => {
     transormations.improve = true;
   }
 
-  const onUploadSuccessHandler = (results, { widget }) => {
+  const onUploadSuccessHandler = (results) => {
     setResource(results?.info);
     toast.success("Image uploaded successfully");
-
-    widget.close();
   };
 
   const onUploadErrorHandler = () => {
@@ -41,6 +40,7 @@ const Input = () => {
                   className="object-cover rounded-[10px]"
                   width={resource.width}
                   height={resource.height}
+                  placeholder={dataUrl}
                 />
               </div>
             ) : (
@@ -77,7 +77,9 @@ const Input = () => {
                 className="object-cover rounded-[10px] mt-5"
                 width={resource.width}
                 height={resource.height}
+                preserveTransformations
                 {...transormations}
+                placeholder={dataUrl}
               />
             )}
           </div>
