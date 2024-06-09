@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import SignOutButton from "./SignOutButton";
 
 export default function Navbar() {
   return (
@@ -25,6 +26,7 @@ export default function Navbar() {
           <Link href={"/restore"} className="hover:text-blue-500 duration-100">
             Restore
           </Link>
+          <SignOutButton />
         </div>
       </div>
     </div>
