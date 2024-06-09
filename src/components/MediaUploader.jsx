@@ -4,8 +4,7 @@ import React, { useEffect, useState } from "react";
 import { CldImage, CldUploadButton } from "next-cloudinary";
 import toast from "react-hot-toast";
 import { dataUrl } from "@/libs/utils";
-
-import Loader from "@/libs/loader";
+import { download } from "@/libs/download";
 
 const Input = () => {
   const [resource, setResource] = useState();
@@ -38,6 +37,15 @@ const Input = () => {
     toast.error("Something went wrong");
   };
 
+  const handleDownload = () => {
+    if (resource?.public_id) {
+      const enhancementUrl =
+        enhancement === "restore" ? "e_gen_restore" : "e_improve";
+      const downloadUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${enhancementUrl}/c_limit,w_${resource.width}/f_auto/q_auto/${resource.public_id}?_a=BAVFB+DW0`;
+      download(downloadUrl, "transformed_image");
+    }
+  };
+
   return (
     <div className="flex flex-col">
       <div>
@@ -50,8 +58,8 @@ const Input = () => {
                   src={resource.public_id}
                   alt="Uploaded"
                   className="object-cover rounded-[10px]"
-                  width={resource.width}
-                  height={resource.height}
+                  width={330}
+                  height={450}
                   placeholder={dataUrl}
                 />
               </div>
@@ -83,14 +91,20 @@ const Input = () => {
                 <p>Transformed Image</p>
               </div>
             ) : isLoading ? (
-              <Loader height={resource.height} width={resource.width} />
+              <div
+                className={`flex justify-center items-center h-${resource.height} w-${resource.width} mt-5`}
+              >
+                <div
+                  className={`border-dotted border-[10px] border-blue-500 rounded-full h-12 w-12 animate-spin`}
+                ></div>
+              </div>
             ) : (
               <CldImage
                 src={resource.public_id}
                 alt="Transformed Image"
                 className="object-cover rounded-[10px] mt-5"
-                width={resource.width}
-                height={resource.height}
+                width={330}
+                height={450}
                 {...transformations}
                 placeholder={dataUrl}
               />
@@ -111,7 +125,10 @@ const Input = () => {
         >
           Improve
         </button>
-        <button className="border-2 border-black hover:bg-gray-200 rounded-md px-6 py-3 text-xl font-semibold">
+        <button
+          className="border-2 border-black hover:bg-gray-200 rounded-md px-6 py-3 text-xl font-semibold"
+          onClick={handleDownload}
+        >
           Download
         </button>
       </div>
