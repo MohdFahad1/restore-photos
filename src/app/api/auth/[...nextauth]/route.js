@@ -11,6 +11,7 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
+  callbacks: {},
 });
 
 export { handler as GET, handler as POST };
