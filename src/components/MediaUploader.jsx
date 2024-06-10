@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from "react";
 import { CldImage, CldUploadButton } from "next-cloudinary";
 import toast from "react-hot-toast";
-import { dataUrl } from "@/libs/utils";
-import { download } from "@/libs/download";
+import { dataUrl } from "@/lib/utils";
+import { download } from "@/lib/download";
 import SignInButton from "./SignInButton";
 import { useSession } from "next-auth/react";
 // import Loader from "@/libs/loader";
