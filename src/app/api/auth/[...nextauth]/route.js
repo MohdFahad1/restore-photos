@@ -1,7 +1,8 @@
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import clientPromise from "@/lib/db";
+import clientPromise, { connectMongoDB } from "@/lib/db";
+import User from "@/models/user";
 
 const handler = NextAuth({
   adapter: MongoDBAdapter(clientPromise),
@@ -16,6 +17,38 @@ const handler = NextAuth({
     async signIn({ user, account }) {
       console.log("USER: ", user);
       console.log("ACCOUNT: ", account);
+
+      if (account.provider === "google") {
+        const { name, email } = user;
+        try {
+          await connectMongoDB();
+
+          const existingUser = await User.findOne({ email });
+
+          if (!existingUser) {
+            const res = await fetch(
+              "https://restore-photos-tmtb.vercel.app/api/user",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  name,
+                  email,
+                }),
+              }
+            );
+
+            if (res.ok) {
+              return user;
+            }
+          }
+        } catch (error) {
+          console.log("Error: ", error);
+        }
+      }
+
       return user;
     },
   },
