@@ -24,23 +24,19 @@ const handler = NextAuth({
           const existingUser = await User.findOne({ email });
 
           if (!existingUser) {
-            const res = await fetch(
-              "https://restore-photos-tmtb.vercel.app/api/user",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  name,
-                  email,
-                }),
-              }
-            );
-
+            const res = await fetch("https://restore-photos-tmtb.vercel.app/api/user", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ name, email }),
+            });
+            
             if (res.ok) {
-              return user;
-            }
+              console.log("User registered successfully");
+            } else {
+              console.log("Failed to register user");
+            }            
           }
         } catch (error) {
           console.log("Error: ", error);
